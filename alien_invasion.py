@@ -1,7 +1,7 @@
 import pygame
 import control
 from ship import Ship
-
+from pygame.sprite import Group
 
 
 def run():
@@ -11,13 +11,12 @@ def run():
     pygame.display.set_caption("alien_invasoin")
     bg_color = (230, 230, 230)
     ship = Ship(screen)
+    bullets = Group()
 
     while True:
-        control.events(ship)
-        screen.fill(bg_color)
+        control.events(screen, ship, bullets)
         ship.update_ship()
-        ship.output()
-
-        pygame.display.flip()
+        control.update(bg_color, screen, ship, bullets)
+        control.update_bullets(bullets)
 
 run()
